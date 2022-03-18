@@ -9,7 +9,7 @@ all: build
 
 build:
 	@echo "Making production version ${FULL_VERSION} of DockOvpn"
-	docker build --build-arg CACHE_DATE="$(date)" -t ainghazal/openvpn  . --no-cache
+	docker build --build-arg CACHE_DATE="$(date)" -t ainghazal/openvpn:latest  . --no-cache
 	#docker push ainghazal/openvpn:latest
 
 build-release:
@@ -35,7 +35,6 @@ clean:
 run:
 	docker run --cap-add=NET_ADMIN \
 	-p 1194:1194/udp -p 8080:8080/tcp \
-	-e HOST_ADDR=localhost \
 	--rm \
 	--name ${NAME} \
 	--env-file=.env \
@@ -43,3 +42,6 @@ run:
 
 shell:
 	docker exec -it ${NAME} /bin/bash
+
+version:
+	docker exec -it ${NAME} ./version.sh
