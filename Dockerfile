@@ -1,6 +1,6 @@
-FROM alpine:3.14.1
+FROM alpine:latest
 
-LABEL maintainer="Alexander Litvinenko <array.shift@yahoo.com>"
+LABEL maintainer="Ain Ghazal <ainghazal42@gmail.com>"
 
 ENV APP_NAME Dockovpn
 ENV APP_INSTALL_PATH /opt/${APP_NAME}
@@ -8,6 +8,7 @@ ENV APP_PERSIST_DIR /opt/${APP_NAME}_data
 
 WORKDIR ${APP_INSTALL_PATH}
 
+ARG CACHE_DATE=2022-03-17
 COPY scripts .
 COPY config ./config
 COPY VERSION ./config
