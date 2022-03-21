@@ -70,6 +70,12 @@ then
     esac
 fi
 
+# Set default value to HOST_ADDR if it was not set from environment
+if [ -z "$HOST_ADDR" ]
+then
+    HOST_ADDR=$(ip addr show eth0 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1)
+fi
+
 echo "$(datef) Config server started, download your $FILE_NAME config at http://$HOST_ADDR/"
 echo "$(datef) NOTE: After you download your client config, http server will be shut down!"
 

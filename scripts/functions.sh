@@ -24,7 +24,7 @@ function createConfig() {
     # Set default value to HOST_ADDR if it was not set from environment
     if [ -z "$HOST_ADDR" ]
     then
-        HOST_ADDR='localhost'
+        HOST_ADDR=$(ip addr show eth0 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1)
     fi
 
     cd "$APP_INSTALL_PATH"

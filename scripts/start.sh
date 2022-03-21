@@ -65,15 +65,15 @@ cd "$APP_INSTALL_PATH"
 # Print app version
 $APP_INSTALL_PATH/version.sh
 
+echo " "
 echo "Setting cipher to" $OPENVPN_CIPHER
 echo "Setting auth to" $OPENVPN_AUTH
-echo "not really"
 
 # Change cipher/auth as per the .env file
-# sed -i "s/cipher AES-256-CBC/cipher ${OPENVPN_CIPHER}/" /etc/openvpn/server.conf
-# sed -i "s/auth SHA1/auth ${OPENVPN_AUTH}/" /etc/openvpn/server.conf
-# sed -i "s/cipher AES-256-CBC/cipher ${OPENVPN_CIPHER}/" config/client.ovpn
-# sed -i "s/auth SHA1/auth ${OPENVPN_AUTH}/" config/client.ovpn
+sed -i "s/cipher AES-256-CBC/cipher ${OPENVPN_CIPHER}/" /etc/openvpn/server.conf
+sed -i "s/auth SHA1/auth ${OPENVPN_AUTH}/" /etc/openvpn/server.conf
+sed -i "s/cipher AES-256-CBC/cipher ${OPENVPN_CIPHER}/" config/client.ovpn
+sed -i "s/auth SHA1/auth ${OPENVPN_AUTH}/" config/client.ovpn
 
 # Need to feed key password
 openvpn --config /etc/openvpn/server.conf &

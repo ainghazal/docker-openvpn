@@ -1,4 +1,4 @@
-FROM alpine:3.14.1
+FROM alpine:latest
 
 LABEL maintainer="Ain Ghazal <ainghazal42@gmail.com>"
 
@@ -7,11 +7,14 @@ ENV APP_INSTALL_PATH /opt/${APP_NAME}
 ENV APP_PERSIST_DIR /opt/${APP_NAME}_data
 
 WORKDIR ${APP_INSTALL_PATH}
-#ARG CACHE_DATE=2022-03-17
+ARG CACHE_DATE=2022-03-17
+
+RUN echo "$(date)"
 
 COPY scripts .
 COPY config ./config
 COPY VERSION ./config
+
 
 RUN apk add --no-cache openvpn easy-rsa bash netcat-openbsd zip dumb-init && \
     mkdir -p ${APP_PERSIST_DIR} && \
